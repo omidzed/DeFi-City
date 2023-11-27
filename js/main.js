@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const mainContent = document.getElementById('main-content');
 
   setTimeout(() => {
-    circle.style.transform = 'scale(50)'; // Adjust the scale as needed
+    circle.style.transform = 'scale(50)';
   }, 500);
 
   circle.addEventListener('transitionend', () => {
