@@ -1,5 +1,5 @@
 const $assetsList = document.querySelector('.assets-list');
-console.log($assetsList);
+console.log('asset list:', $assetsList);
 const assetsData = [];
 const targetUrl = encodeURIComponent(
   'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest',
@@ -14,15 +14,19 @@ xhr.responseType = 'json';
 xhr.addEventListener('load', function () {
   let marketData = [];
   marketData = xhr.response.data;
+  console.log(marketData);
   for (let i = 0; i < marketData.length; i++) {
+    const price = marketData[i].quote.USD.price;
+    const formattedPrice = price.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
     const asset = {
       name: marketData[i].name,
-      symbol: marketData[i].symbol,
-      cmcRank: marketData[i].cmc_rank,
-      infiniteSupply: marketData[i].infinite_supply,
+      price: formattedPrice,
+      percentChange: marketData[i].quote.USD.percent_change_24h,
     };
     assetsData.push(asset);
     $assetsList.append(renderAsset(asset));
+    if (asset.percentChange < 0) {
+    }
   }
 });
 xhr.send();
@@ -32,19 +36,29 @@ function renderAsset(asset) {
   $homePageListing.setAttribute('class', 'home-page-listing');
 
   const $logoContainer = document.createElement('div');
-  $logoContainer.setAttribute('class', 'home-page-listing');
+  $logoContainer.setAttribute('class', 'logo-container');
 
   const $name = document.createElement('div');
-  $homePageListing.setAttribute('class', 'name');
+  $name.setAttribute('class', 'name');
+  $name.textContent = asset.name;
 
   const $price = document.createElement('div');
   $price.setAttribute('class', 'price');
+  $price.textContent = '$' + asset.price;
 
   const $percentChange = document.createElement('div');
   $percentChange.setAttribute('class', 'percent-change');
 
+  $percentChange.textContent =
+    '\u25B2' + '%' + asset.percentChange.toFixed(2) + '(1d)';
+  if (asset.percentChange < 0) {
+    $percentChange.classList.add('red');
+    $percentChange.textContent =
+      '\u25BC' + '%' + asset.percentChange.toFixed(2) + '(1d)';
+  }
+
   const $heartIcon = document.createElement('i');
-  $heartIcon.setAttribute('class', 'home-page-heart');
+  $heartIcon.setAttribute('class', 'fa-regular fa-heart');
 
   $homePageListing.appendChild($logoContainer);
   $homePageListing.appendChild($name);
@@ -56,34 +70,6 @@ function renderAsset(asset) {
 }
 
 console.log(assetsData);
-
-// price: marketData[i].quote,
-//   oneDayChange: marketData[i].quote,
-
-// const assets = xhr.response;
-
-// for (let i = 0; i < users.length; i++) {
-//   const user = users[i];
-//   const $li = document.createElement('li');
-//   $li.textContent = user.name;
-//   $usersList.appendChild($li);
-
-// This function will handle the initialization of the app.
-// function initializeApp() {
-//   fetchLatest().then(data => {
-//     const asset = {
-//       assetId: data.nextAssetId,
-//       name: data.name
-//     };
-//   });
-// }
-
-// document.addEventListener('DOMContentLoaded', function () {
-//   initializeApp();
-// });
-
-// Call this function to fetch and store data
-// processAndStoreCryptoData();
 
 // document.addEventListener('DOMContentLoaded', function (event){
 //   const splashPage = document.querySelector('.splash-page');

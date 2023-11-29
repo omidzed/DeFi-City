@@ -13,11 +13,16 @@
 }
 
 header {
+  display: flex;
+  justify-content: center;
   background-color: rgb(35, 31, 32);
-  flex: 0 0 100px;
 }
 
-.main-container {
+.assets-list {
+  max-width: 400;
+}
+
+.container {
   display: flex;
   flex-direction: column;
   max-width: 430px;
