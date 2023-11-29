@@ -8,14 +8,53 @@
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/layout.css" />
     <link rel="stylesheet" href="css/styles.css" />
+    <script
+      src="https://kit.fontawesome.com/c9f93e45d2.js"
+      crossorigin="anonymous"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400&display=swap"
+      rel="stylesheet" />
   </head>
   <body>
-    <header></header>
-    <div class="splash-page">
+    <div class="splash-page hidden">
       <img class="splash" src="/images/splash.jpg" alt="splash-page" />
-      <div id="circle"></div>
+      <div class="circle"></div>
     </div>
-    <main></main>
+
+    <div class="main-container" data-view="home-page">
+      <header>
+        <div class="header-row">
+          <img class="app-logo" src="./images/defi.png" />
+        </div>
+      </header>
+      <div class="search-heart-container">
+        <form id="search-form">
+          <input
+            class="search-box"
+            type="search"
+            placeholder="Seach assets/coins" />
+        </form>
+        <i class="home-page-heart fa-regular fa-heart"></i>
+      </div>
+
+      <div class="assets-list">
+        <div class="home-page-listing">
+          <div class="logo-container"></div>
+          <div class="name">Bitcoin</div>
+          <div class="price">$27,585.46</div>
+          <div class="percent-change">%11.45(1d)</div>
+          <i class="home-page-heart fa-regular fa-heart"></i>
+        </div>
+        <div class="home-page-listing">
+          <div id="logo-container"></div>
+          <div id="name">Bitcoin</div>
+          <div id="price">$27,585.46</div>
+          <div id="percent-change">%11.45(1d)</div>
+          <i id="heart" class="home-page-heart fa-regular fa-heart"></i>
+        </div>
+      </div>
+    </div>
+
     <script src="js/data.js"></script>
     <script src="js/main.js"></script>
   </body>
