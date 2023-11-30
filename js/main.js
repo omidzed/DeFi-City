@@ -22,16 +22,16 @@ xhr.addEventListener('load', function () {
       name: marketData[i].name,
       price: formattedPrice,
       percentChange: marketData[i].quote.USD.percent_change_24h,
+      symbol: marketData[i].symbol,
     };
     assetsData.push(asset);
     $assetsList.append(renderAsset(asset));
-    if (asset.percentChange < 0) {
-    }
   }
 });
 xhr.send();
 
 function renderAsset(asset) {
+  const $column = document.createElement('div');
   const $homePageListing = document.createElement('div');
   $homePageListing.setAttribute('class', 'home-page-listing');
 
@@ -40,7 +40,11 @@ function renderAsset(asset) {
 
   const $name = document.createElement('div');
   $name.setAttribute('class', 'name');
-  $name.textContent = asset.name;
+  if (asset.name.length < 15) {
+    $name.textContent = asset.name;
+  } else {
+    $name.textContent = asset.symbol;
+  }
 
   const $price = document.createElement('div');
   $price.setAttribute('class', 'price');
@@ -59,18 +63,29 @@ function renderAsset(asset) {
 
   const $heartIcon = document.createElement('i');
   $heartIcon.setAttribute('class', 'fa-regular fa-heart');
-
+  $column.appendChild($homePageListing);
   $homePageListing.appendChild($logoContainer);
   $homePageListing.appendChild($name);
   $homePageListing.appendChild($price);
   $homePageListing.appendChild($percentChange);
   $homePageListing.appendChild($heartIcon);
 
-  return $homePageListing;
+  return $column;
 }
 
 console.log(assetsData);
 
+// const $row = document.createElement('div');
+// $row.setAttribute('class', 'row');
+
+// const $columnThirdOne = document.createElement('div');
+// $columnThirdOne.setAttribute('class', 'column-third');
+
+// const $columnThirdTwo = document.createElement('div');
+// $columnThirdTwo.setAttribute('class', 'column-third');
+
+// const $columnThirdThree = document.createElement('div');
+// $columnThirdThree.setAttribute('class', 'column-third');
 // document.addEventListener('DOMContentLoaded', function (event){
 //   const splashPage = document.querySelector('.splash-page');
 //   const circle = document.querySelector('.circle');

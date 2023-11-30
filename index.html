@@ -20,40 +20,25 @@
       <img class="splash" src="/images/splash.jpg" alt="splash-page" />
       <div class="circle"></div>
     </div>
-
-    <div class="container" data-view="home-page">
-      <header>
-        <img class="app-logo" src="./images/defi.png" />
-      </header>
-      <div class="search-heart-container">
-        <form id="search-form">
-          <input
-            class="search-box"
-            type="search"
-            placeholder="Search assets/coins" />
-        </form>
-        <i class="home-page-heart fa-regular fa-heart"></i>
-      </div>
-
-      <div class="assets-list">
-        <!-- <div class="home-page-listing">
-          <div class="logo-container"></div>
-          <div class="name">Bitcoin</div>
-          <div class="price">$27,585.46</div>
-          <div class="percent-change">%1.45(1d)</div>
+    <main class="container">
+      <div class="view-container" data-view="home-page">
+        <header>
+          <img class="app-logo" src="./images/defi.png" />
+        </header>
+        <div class="search-box-container">
+          <form id="search-form">
+            <input
+              class="search-box"
+              type="search"
+              placeholder="Search assets/coins" />
+          </form>
           <i class="home-page-heart fa-regular fa-heart"></i>
         </div>
-
-        <div class="home-page-listing">
-          <div class="logo-container"></div>
-          <div class="name">Bitcoin</div>
-          <div class="price">$27,585.46</div>
-          <div class="percent-change">%1.45(1d)</div>
-          <i class="home-page-heart fa-regular fa-heart"></i>
-        </div> -->
+        <div class="assets-list"></div>
       </div>
-    </div>
 
+      <div class="view-container hidden" data-view="watch-list"></div>
+    </main>
     <script src="js/data.js"></script>
     <script src="js/main.js"></script>
   </body>
