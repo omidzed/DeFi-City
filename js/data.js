@@ -3,6 +3,7 @@
 let data = {
   view: 'home-page',
   watchListItems: [],
+  nextAssetId: 1,
 };
 
 window.addEventListener('beforeunload', function (event) {

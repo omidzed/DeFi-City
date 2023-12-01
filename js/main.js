@@ -141,6 +141,17 @@ function viewSwap(targetView) {
   data.view = targetView;
 }
 
+const $heartIcons = document.querySelectorAll('.fa-heart');
+console.log('heartIcons', $heartIcons);
+
+function heartIconHandler(event) {
+  if (event.target.tagName === 'I') {
+    const watchListItem = {
+      assetId: data.nextAssetId,
+    };
+  }
+}
+
 // const $columnThirdThree = document.createElement('div');
 // $columnThirdThree.setAttribute('class', 'column-third');
 // document.addEventListener('DOMContentLoaded', function (event){
