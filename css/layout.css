@@ -6,17 +6,39 @@
   margin: 0 auto;
 }
 
+.assets-list,
+.watched-assets {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.assets-list > div,
+.watched-assets > div {
+  width: 100%;
+}
+
+.row {
+  display: flex;
+}
+
 @media screen and (min-width: 768px) {
   .home-page-listing {
     max-width: 250px;
     width: 100%;
   }
 
+  .assets-list > div {
+    width: 33.3%;
+  }
+
   .assets-list {
     display: flex;
     justify-content: space-between;
-
-    /* flex-direction: column; */
     flex-wrap: wrap;
+  }
+
+  .search-box {
+    padding: 0.5rem 3rem;
   }
 }
