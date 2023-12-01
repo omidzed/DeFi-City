@@ -130,7 +130,16 @@ function renderWatchedAsset(asset) {
   return $watchListItem;
 }
 
-console.log('assets Data: ', assetsData);
+function viewSwap(targetView) {
+  for (let i = 0; i < $views.length; i++) {
+    if ($views[i].getAttribute('data-view') === targetView) {
+      $views[i].classList.remove('hidden');
+    } else {
+      $views[i].classList.add('hidden');
+    }
+  }
+  data.view = targetView;
+}
 
 // const $columnThirdThree = document.createElement('div');
 // $columnThirdThree.setAttribute('class', 'column-third');
