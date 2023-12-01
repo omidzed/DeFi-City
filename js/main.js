@@ -1,6 +1,7 @@
 const $assetsList = document.querySelector('.assets-list');
-const $watchList = document.querySelector('watch-list');
+const $watchList = document.querySelector('.watch-list');
 console.log('asset list:', $assetsList);
+console.log('watch-list:', $watchList);
 const assetsData = [];
 const targetUrl = encodeURIComponent(
   'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest',
@@ -15,9 +16,8 @@ xhr.responseType = 'json';
 xhr.addEventListener('load', function () {
   let marketData = [];
   marketData = xhr.response.data;
-  console.log(marketData);
+  console.log('marketdata', marketData);
   for (let i = 0; i < marketData.length - 1; i++) {
-    // getIndividalCurrency(marketData[i].id);
     const price = marketData[i].quote.USD.price;
     const formattedPrice = price.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
     const asset = {
@@ -28,6 +28,7 @@ xhr.addEventListener('load', function () {
     };
     assetsData.push(asset);
     $assetsList.append(renderAsset(asset));
+    $watchList.append(renderWatchedAsset(asset));
   }
 });
 xhr.send();
@@ -80,15 +81,18 @@ function renderAsset(asset) {
 }
 
 function renderWatchedAsset(asset) {
-  const $column = document.createElement('div');
-  $column.setAttribute('class', 'column-third');
-
   const $watchListItem = document.createElement('div');
   $watchListItem.setAttribute('class', 'watch-list-item');
 
+  const $row = document.createElement('div');
+  $row.setAttribute('class', 'row');
+
   const $logo = document.createElement('img');
-  $logo.setAttribute('class', 'asset-logo');
+  $logo.setAttribute('class', 'watch-list-item-logo');
   $logo.src = 'images/Bitcoin.png';
+
+  const $watchListItemStats = document.createElement('div');
+  $watchListItemStats.setAttribute('class', 'watch-list-item-stats');
 
   const $name = document.createElement('div');
   $name.setAttribute('class', 'name');
@@ -113,21 +117,20 @@ function renderWatchedAsset(asset) {
 
   const $cmcRank = document.createElement('div');
   $cmcRank.setAttribute('class', 'cmc-rank');
+  $cmcRank.src = 'images/Coinmarketcap_svg_logo.svg';
 
-  const $cmcLogo = document.createElement('img');
-  $cmcLogo.setAttribute('class', 'asset-logo');
-  $cmcLogo.src = 'images/Coinmarketcap_svg_logo.svg';
+  $watchListItem.appendChild($row);
+  $row.appendChild($logo);
+  $row.appendChild($watchListItemStats);
+  $watchListItemStats.appendChild($name);
+  $watchListItemStats.appendChild($symbol);
+  $watchListItemStats.appendChild($price);
+  $watchListItemStats.appendChild($percentChange);
 
-  $column.appendChild($homePageListing);
-  $homePageListing.appendChild($logo);
-  $homePageListing.appendChild($name);
-  $homePageListing.appendChild($price);
-  $homePageListing.appendChild($percentChange);
-  $homePageListing.appendChild($heartIcon);
-
-  return $column;
+  return $watchListItem;
 }
-console.log(assetsData);
+
+console.log('assets Data: ', assetsData);
 
 // const $columnThirdThree = document.createElement('div');
 // $columnThirdThree.setAttribute('class', 'column-third');

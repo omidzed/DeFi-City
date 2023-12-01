@@ -29,12 +29,20 @@
   gap: 0.5rem;
   box-sizing: border-box;
   background-color: #fff;
-  border: 0.1px solid rgb(165, 162, 163);
+  border: 0.1px solid rgba(165, 162, 163, 0.243);
   box-shadow: -1px 3px 7px rgba(0, 0, 0, 0.52);
   margin: 1rem 2rem;
   align-items: center;
   justify-content: flex-start;
-  height: 3.5rem;
+  height: 4rem;
+  border-left: 0.1px solid rgb(128, 128, 128);
+  border-radius: 2px;
+}
+
+.watch-list-item-logo {
+  width: 4rem;
+  background-color: rgba(128, 128, 128, 0.729);
+  padding: 0.7rem;
 }
 
 .asset-logo {
@@ -79,11 +87,6 @@ header {
 
 .app-logo {
   width: 100px;
-}
-
-.watch-list-item-logo {
-  width: 2.5rem;
-  margin-left: 1rem;
 }
 
 .search-box {
