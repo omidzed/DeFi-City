@@ -45,16 +45,16 @@
   padding: 0.7rem;
 }
 
-/* .asset-logo {
+.asset-logo {
   width: 2.5rem;
   background-color: rgba(128, 128, 128, 0.729);
   padding: 0.2rem;
-} */
+}
 
-.asset-logo {
+/* .asset-logo {
   width: 2rem;
   margin-left: 0.4rem;
-}
+} */
 
 .name {
   font-size: 0.9rem;
@@ -131,4 +131,8 @@ input:focus::placeholder {
 
 .cmc-rank {
   width: 3rem;
+}
+
+.red-heart {
+  color: red;
 }

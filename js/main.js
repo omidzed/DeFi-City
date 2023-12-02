@@ -141,63 +141,78 @@ function viewSwap(targetView) {
   data.view = targetView;
 }
 
-const $heartIcons = document.querySelectorAll('.fa-heart');
-console.log('heartIcons', $heartIcons);
+const $heartIcons = document.querySelectorAll('i');
+console.log($heartIcons);
 
-function heartIconHandler(event) {
-  if (event.target.tagName === 'I') {
-    const watchListItem = {
-      assetId: data.nextAssetId,
-    };
-  }
-}
+//$assetsList.addEventListener('click', function (event) {
+//if (event.target.tagName === 'I') {
+//const $column = event.target.closest('.column-third');
+// const watchListAsset = {
+//   assetId: data.nextAssetId,
+//   name: $listItem.$name.textContent,
+//   price: $listItem.$price.textContent,
+// };
+// }
+// data.watchListAssets.unshift(asset);
+// data.nextAssetId++;
+// $assetsList.prepend(renderAsset(asset));
+//$column.getAttribute()
 
-// const $columnThirdThree = document.createElement('div');
-// $columnThirdThree.setAttribute('class', 'column-third');
-// document.addEventListener('DOMContentLoaded', function (event){
+// function heartIconHandler(event)
+
+// document.addEventListener('DOMContentLoaded', function (event) {
 //   const splashPage = document.querySelector('.splash-page');
 //   const circle = document.querySelector('.circle');
-//   const mainContent = document.querySelector('.main-container');
+//   const mainContent = document.querySelector('.container');
+//   const $assets = data.watchListAssets;
 
-//   setTimeout(function() {
+//   for (let i = 0; i < $assets.length; i++) {
+//     const asset = renderAsset($assets[i]);
+//     $assetsList.appendChild(asset);
+//   }
+//   viewSwap(data.view);
+
+//   // Delay for the splash screen
+//   setTimeout(function (event) {
 //     circle.style.transform = 'scale(50)';
 //   }, 5000);
 
-//   circle.addEventListener('transitionend', function() {
+//   circle.addEventListener('transitionend', function (event) {
 //     mainContent.classList.remove('hidden');
 //     splashPage.style.display = 'none';
 //   });
-// });
-
-// document.addEventListener('DOMContentLoaded', function () {
 //   setTimeout(function () {
 //     const splashScreen = document.getElementById('splash-screen');
 //     splashScreen.style.clipPath = 'circle(100% at 50% 50%)'; // Grow the circle
 
-//     // Optional: listen for the end of the transition
+//     // listen for the end of the transition
 //     splashScreen.addEventListener('transitionend', function () {
-//       document.getElementById('main-content').classList.remove('hidden'); // Show main content
+//       document.getElementsByTagName('main').classList.remove('hidden'); // Show main content
 //       splashScreen.style.display = 'none'; // Hide splash screen
 //     });
-//   }, 3000); // Delay for the splash screen
+//   }, 3000);
 // });
+//  if (data.editing === null) {
+//   data.entries.unshift(entry);
+//   data.nextEntryId++;
+//   $photoPreview.src = 'images/placeholder-image-square.jpg';
+//   $entriesList.prepend(renderEntry(entry));
+//   $entryForm.reset();
 
-// function getIndividalCurrency(id) {
-//   // const targetUrl =
-//   //   'https://pro-api.coinmarketcap.com/v1/exchange/info?id=74';
-//   const targetUrl =
-//     `https://pro-api.coinmarketcap.com/v2/cryptocurrency/info?id=${id}`;
-//   const xhr = new XMLHttpRequest();
-//   xhr.open('GET', 'https://lfz-cors.herokuapp.com/?url=' + targetUrl);
-//   xhr.setRequestHeader(
-//     'X-CMC_PRO_API_KEY',
-//     '44f133d8-a055-48f2-a1c2-2cdfa46723f7',
-//   );
-//   xhr.responseType = 'json';
-//   xhr.addEventListener('load', function () {
-//     let marketData = [];
-//     marketData = xhr.response;
-//     console.log('logos log:', marketData);
-//   });
-//   xhr.send();
-// }
+//   viewSwap('entries');
+//   toggleNoEntries();
+// } else {
+//   entry.entryId = data.editing.entryId;
+//   const $listItems = document.querySelectorAll('li');
+//   for (let i = 0; i < $listItems.length; i++) {
+//     const dataEntryId = $listItems[i].getAttribute('data-entry-id');
+//     if (Number(dataEntryId) === data.editing.entryId) {
+//       data.entries[i] = entry;
+//       $listItems[i].replaceWith(renderEntry(entry));
+//     }
+//   }
+//   data.editing = null;
+//   $H2element.textContent = 'New Entry';
+//   $photoPreview.src = 'images/placeholder-image-square.jpg';
+//   $entryForm.reset();
+//   viewSwap('entries');

@@ -2,7 +2,8 @@
 
 let data = {
   view: 'home-page',
-  watchListItems: [],
+  watchListAssets: [],
+  editing: null,
   nextAssetId: 1,
 };
 
