@@ -25,6 +25,7 @@ xhr.responseType = 'json';
 xhr.addEventListener('load', function () {
   let marketData = [];
   marketData = xhr.response.data;
+  data.currencies = xhr.response.data;
   console.log('marketdata', marketData);
   for (let i = 0; i < marketData.length - 1; i++) {
     const price = marketData[i].quote.USD.price;
@@ -56,6 +57,7 @@ console.log('assetsData', assetsData);
 function renderAsset(asset) {
   const $column = document.createElement('div');
   $column.setAttribute('class', 'column-third');
+  $column.setAttribute('data-id', asset.id);
 
   const $homePageListing = document.createElement('div');
   $homePageListing.setAttribute('class', 'home-page-listing');
@@ -207,7 +209,17 @@ $assetsList.addEventListener('click', function (event) {
   if (event.target.tagName === 'I') {
     event.target.classList.add('red-heart');
     //  const $columnThird = event.target.closest('.fa-regular');
-    const columnThird = event.target.closest('.home-page-listing');
+    event.target.classList.add('.red-heart');
+    const columnThird = event.target.closest('div');
+    for (let i = 0; i < data.currencies.length; i++) {
+      if (
+        Number(columnThird.getAttribute('data-id')) ===
+        Number(data.currencies[i].id)
+      ) {
+        data.favorites.unshift(data.currencies[i]);
+        console.log(data.currencies[i]);
+      }
+    }
   }
 });
 
