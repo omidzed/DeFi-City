@@ -5,6 +5,11 @@
   position: relative;
 }
 
+body {
+  color: black;
+  background-color: white;
+}
+
 .home-page-listing {
   max-width: 300px;
   min-width: 250px;
@@ -22,7 +27,7 @@
 }
 
 .watch-list-item {
-  max-width: 300px;
+  max-width: 375px;
   min-width: 250px;
   width: 100%;
   display: flex;
@@ -31,10 +36,10 @@
   background-color: #fff;
   border: 0.1px solid rgba(165, 162, 163, 0.243);
   box-shadow: -1px 3px 7px rgba(0, 0, 0, 0.52);
-  margin: 1rem 2rem;
+  margin: 0.5rem 2rem;
   align-items: center;
   justify-content: flex-start;
-  height: 4rem;
+  height: 8rem;
   border-left: 0.1px solid rgb(128, 128, 128);
   border-radius: 2px;
 }
@@ -45,16 +50,46 @@
   padding: 0.7rem;
 }
 
+.top-row {
+  width: 100%;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.top-row-section1 {
+  width: 70%;
+  margin-right: 2rem;
+}
+
+.top-row-section2 {
+  margin-left: 5rem;
+  width: 30%;
+  display: flex;
+  justify-content: space-between;
+  margin-right: 0.5rem;
+}
+
+.circulating-supply {
+  font-size: 1rem;
+}
+
+.stats-div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .asset-logo {
   width: 2.5rem;
   background-color: rgba(128, 128, 128, 0.729);
   padding: 0.2rem;
 }
 
-/* .asset-logo {
-  width: 2rem;
-  margin-left: 0.4rem;
-} */
+.cmc-image {
+  width: 50px;
+}
 
 .name {
   font-size: 0.9rem;
@@ -69,6 +104,7 @@
   width: 20%;
   text-align: right;
   margin-right: 0.5rem;
+  font-weight: bold;
 }
 
 .percent-change {

@@ -10,14 +10,14 @@
 }
 
 .assets-list,
-.watched-assets {
+.watch-list {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
 }
 
 .assets-list > div,
-.watched-assets > div {
+.watch-list > div {
   width: 100%;
 }
 
@@ -31,11 +31,13 @@
     width: 100%;
   }
 
-  .assets-list > div {
+  .assets-list > div,
+  .watch-list > div {
     width: 33.3%;
   }
 
-  .assets-list {
+  .assets-list,
+  .watch-list {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
