@@ -2,12 +2,8 @@
 
 const $assetsList = document.querySelector('.assets-list');
 const $watchList = document.querySelector('.watch-list');
-const $heartIcon = document.createElement('i');
-const $mainContainer = document.querySelector('.main-container');
-const views = $mainContainer.querySelectorAll('.view-container');
-console.log('views', views);
-
-$heartIcon.setAttribute('class', 'fa-regular fa-heart');
+const $assetsListNode = document.querySelectorAll('.column-third');
+console.log($assetsList);
 
 console.log('asset list:', $assetsList);
 console.log('watch-list:', $watchList);
@@ -27,8 +23,9 @@ xhr.addEventListener('load', function () {
   marketData = xhr.response.data;
   data.currencies = xhr.response.data;
   console.log('marketdata', marketData);
-  for (let i = 0; i < marketData.length - 1; i++) {
+  for (let i = 0; i < marketData.length; i++) {
     const price = marketData[i].quote.USD.price;
+    const logo = data.logos[i].logo;
     const formattedPrice = price.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
     const formatter = new Intl.NumberFormat('en-US', {
       notation: 'compact',
@@ -46,14 +43,20 @@ xhr.addEventListener('load', function () {
       volume: volume,
       marketCap: marketCap,
       circulatingSupply: circulatingSupply,
+      id: marketData[i].id,
+      logo: data.logos[i].logo,
     };
     assetsData.push(asset);
+    if (Number(data.logos[i].id) === Number(data.currencies[i].id)) {
+      logo.src = data.logos[i].logo;
+    }
     $assetsList.append(renderAsset(asset));
     $watchList.append(renderWatchedAsset(asset));
   }
 });
 xhr.send();
 console.log('assetsData', assetsData);
+
 function renderAsset(asset) {
   const $column = document.createElement('div');
   $column.setAttribute('class', 'column-third');
@@ -61,11 +64,13 @@ function renderAsset(asset) {
 
   const $homePageListing = document.createElement('div');
   $homePageListing.setAttribute('class', 'home-page-listing');
-  $homePageListing.setAttribute('data-asset-id', data.nextAssetId);
 
   const $logo = document.createElement('img');
   $logo.setAttribute('class', 'asset-logo');
-  $logo.src = 'images/Bitcoin.png';
+  $logo.src = asset.logo;
+  // if (Number(data.logos[i].id) === Number(data.currencies[i].id)) {
+
+  // }
 
   const $name = document.createElement('div');
   $name.setAttribute('class', 'name');
@@ -91,7 +96,7 @@ function renderAsset(asset) {
   }
 
   const $heartIcon = document.createElement('i');
-  $heartIcon.setAttribute('class', 'fa-regular fa-heart');
+  $heartIcon.setAttribute('class', 'fa-regular fa-heart white-heart');
 
   $column.appendChild($homePageListing);
   $homePageListing.appendChild($logo);
@@ -203,22 +208,40 @@ function viewSwap(targetView) {
   data.view = targetView;
 }
 
-const $heartIcons = document.querySelectorAll('i');
-
 $assetsList.addEventListener('click', function (event) {
   if (event.target.tagName === 'I') {
+    const assetColumnDiv = event.target.closest('.column-third');
+    const heartFav = event.target;
+    console.log(heartFav);
+    console.log(assetColumnDiv);
     event.target.classList.add('red-heart');
-    //  const $columnThird = event.target.closest('.fa-regular');
-    event.target.classList.add('.red-heart');
-    const columnThird = event.target.closest('div');
+    event.target.classList.remove('white-heart');
+
     for (let i = 0; i < data.currencies.length; i++) {
       if (
-        Number(columnThird.getAttribute('data-id')) ===
-        Number(data.currencies[i].id)
+        Number(assetColumnDiv.getAttribute('data-id')) ===
+          Number(data.currencies[i].id) &&
+        data.favorites[i] === null
       ) {
         data.favorites.unshift(data.currencies[i]);
+        $watchList.add;
         console.log(data.currencies[i]);
       }
+    }
+  } else if (assetColumnDiv.getAttribute('white-heart') === null) {
+    event.target.classList.remove('.red-heart');
+    const $watchListItems = document.querySelectorAll('.watch-list-item');
+    console.log('watchListItems', $watchListItems);
+    for (let i = 0; i < data.favorites.length; i++) {
+      const favoriteAssetId = $watchListItems[i].getAttribute('data-id');
+      if (Number(data.favorites.id) === Number(favoriteAssetId)) {
+        $watchListItems[i].remove();
+        event.target.classList.add('.white-heart');
+        data.favorites.splice(i, 1);
+      }
+
+      data.favorites.splice(i, 1);
+      $watchList.remove();
     }
   }
 });
