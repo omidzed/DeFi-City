@@ -3,10 +3,10 @@
 const $assetsList = document.querySelector('.assets-list');
 const $watchList = document.querySelector('.watch-list');
 const $assetsListNode = document.querySelectorAll('.column-third');
-console.log($assetsList);
+const $watchListIcon = document.querySelector('#watch-list-icon');
+const $views = document.querySelectorAll('.view-container');
+const $appLogo = document.querySelector('.app-logo');
 
-console.log('asset list:', $assetsList);
-console.log('watch-list:', $watchList);
 const assetsData = [];
 const targetUrl = encodeURIComponent(
   'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest',
@@ -23,7 +23,7 @@ xhr.addEventListener('load', function () {
   marketData = xhr.response.data;
   data.currencies = xhr.response.data;
   console.log('marketdata', marketData);
-  for (let i = 0; i < marketData.length; i++) {
+  for (let i = 0; i < marketData.length - 1; i++) {
     const price = marketData[i].quote.USD.price;
     const logo = data.logos[i].logo;
     const formattedPrice = price.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
@@ -196,7 +196,7 @@ function renderWatchedAsset(asset) {
 
   return $column;
 }
-
+// In charge of switching views
 function viewSwap(targetView) {
   for (let i = 0; i < $views.length; i++) {
     if ($views[i].getAttribute('data-view') === targetView) {
@@ -208,6 +208,18 @@ function viewSwap(targetView) {
   data.view = targetView;
 }
 
+$watchListIcon.addEventListener('click', handleWatchListIcon);
+$appLogo.addEventListener('click', handleAppLogo);
+// Switches to watch-list
+function handleWatchListIcon(event) {
+  viewSwap('watch-list');
+}
+// Switches to Home-Page
+function handleAppLogo(event) {
+  viewSwap('home-page');
+}
+
+// Adds Assets to the Watch-List
 $assetsList.addEventListener('click', function (event) {
   if (event.target.tagName === 'I') {
     const assetColumnDiv = event.target.closest('.column-third');
