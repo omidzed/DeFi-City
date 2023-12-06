@@ -2,7 +2,6 @@
 
 const $assetsList = document.querySelector('.assets-list');
 const $watchList = document.querySelector('.watch-list');
-const $assetsListNode = document.querySelectorAll('.column-third');
 const $watchListIcon = document.querySelector('#watch-list-icon');
 const $views = document.querySelectorAll('.view-container');
 const $appLogo = document.querySelector('.app-logo');
@@ -23,7 +22,7 @@ xhr.addEventListener('load', function () {
   marketData = xhr.response.data;
   data.currencies = xhr.response.data;
   console.log('marketdata', marketData);
-  for (let i = 0; i < marketData.length - 1; i++) {
+  for (let i = 0; i < marketData.length; i++) {
     const price = marketData[i].quote.USD.price;
     const logo = data.logos[i].logo;
     const formattedPrice = price.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
@@ -56,6 +55,18 @@ xhr.addEventListener('load', function () {
 });
 xhr.send();
 console.log('assetsData', assetsData);
+
+const searchInput = document.querySelector('.search-box');
+searchInput.t;
+console.log(searchInput);
+searchInput.addEventListener('keydown', () => {
+  const searchValue = searchInput.value.toLowerCase();
+  const filteredAssets = assetsData.filter((asset) =>
+    asset.toLowerCase().includes(searchValue),
+  );
+
+  renderAsset(filteredAssets);
+});
 
 function renderAsset(asset) {
   const $column = document.createElement('div');
