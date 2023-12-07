@@ -12,14 +12,6 @@
   background: linear-gradient(rgb(35, 31, 32), white, black);
 }
 
-/* .view-container {
-  display: flex;
-  flex-direction: column;
-  margin: 0 auto;
-  align-items: center;
-  background: linear-gradient(rgb(35, 31, 32), white, black);
-} */
-
 .assets-list,
 .watch-list {
   display: flex;

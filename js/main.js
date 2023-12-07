@@ -7,15 +7,6 @@ const $views = document.querySelectorAll('.view-container');
 const $appLogo = document.querySelector('.app-logo');
 const $searchInput = document.querySelector('.search-box');
 
-// $searchInput.addEventListener('keydown', () => {
-//   const searchValue = $searchInput.value.toLowerCase();
-//   const filteredAssets = assetsData.filter((asset) =>
-//     asset.name.toLowerCase().includes(searchValue),
-//   );
-
-//   renderAsset(filteredAssets);
-// });
-
 // Debounce function to limit the frequency of event handling
 function debounce(func, delay) {
   let inDebounce;
@@ -296,73 +287,3 @@ $assetsList.addEventListener('click', function (event) {
     }
   }
 });
-
-// const watchListAsset = {
-//   assetId: data.nextAssetId,
-//   name: $listItem.$name.textContent,
-//   price: $listItem.$price.textContent,
-// };
-// }
-// data.watchListAssets.unshift(asset);
-// data.nextAssetId++;
-// $assetsList.prepend(renderAsset(asset));
-//$column.getAttribute()
-
-// function heartIconHandler(event)
-
-// document.addEventListener('DOMContentLoaded', function (event) {
-//   const splashPage = document.querySelector('.splash-page');
-//   const circle = document.querySelector('.circle');
-//   const mainContent = document.querySelector('.container');
-//   const $assets = data.watchListAssets;
-
-//   for (let i = 0; i < $assets.length; i++) {
-//     const asset = renderAsset($assets[i]);
-//     $assetsList.appendChild(asset);
-//   }
-//   viewSwap(data.view);
-
-//   // Delay for the splash screen
-//   setTimeout(function (event) {
-//     circle.style.transform = 'scale(50)';
-//   }, 5000);
-
-//   circle.addEventListener('transitionend', function (event) {
-//     mainContent.classList.remove('hidden');
-//     splashPage.style.display = 'none';
-//   });
-//   setTimeout(function () {
-//     const splashScreen = document.getElementById('splash-screen');
-//     splashScreen.style.clipPath = 'circle(100% at 50% 50%)'; // Grow the circle
-
-//     // listen for the end of the transition
-//     splashScreen.addEventListener('transitionend', function () {
-//       document.getElementsByTagName('main').classList.remove('hidden'); // Show main content
-//       splashScreen.style.display = 'none'; // Hide splash screen
-//     });
-//   }, 3000);
-// });
-//  if (data.editing === null) {
-//   data.entries.unshift(entry);
-//   data.nextEntryId++;
-//   $photoPreview.src = 'images/placeholder-image-square.jpg';
-//   $entriesList.prepend(renderEntry(entry));
-//   $entryForm.reset();
-
-//   viewSwap('entries');
-//   toggleNoEntries();
-// } else {
-//   entry.entryId = data.editing.entryId;
-//   const $listItems = document.querySelectorAll('li');
-//   for (let i = 0; i < $listItems.length; i++) {
-//     const dataEntryId = $listItems[i].getAttribute('data-entry-id');
-//     if (Number(dataEntryId) === data.editing.entryId) {
-//       data.entries[i] = entry;
-//       $listItems[i].replaceWith(renderEntry(entry));
-//     }
-//   }
-//   data.editing = null;
-//   $H2element.textContent = 'New Entry';
-//   $photoPreview.src = 'images/placeholder-image-square.jpg';
-//   $entryForm.reset();
-//   viewSwap('entries');
