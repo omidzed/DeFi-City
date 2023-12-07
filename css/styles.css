@@ -140,24 +140,21 @@ header {
   display: flex;
   width: 9rem;
   justify-content: center;
-  font-size: 0.7rem;
   font-weight: 400;
   box-sizing: border-box;
   border-radius: 5px;
   border: 1px solid rgba(141, 141, 141, 0.878);
-  margin: 0.75rem 1rem;
+  margin: 0 0.75rem 1rem;
   max-width: 100%;
   padding: 0.5rem 0.1rem;
   text-align: center;
+  font-style: italic;
   cursor: pointer;
-  font-family: FontAwesome, sans-serif;
-  font-style: normal;
-  text-decoration: inherit;
 }
 
 .search-box-container {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: center;
   margin-top: 0.5rem;
 }

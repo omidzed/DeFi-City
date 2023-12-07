@@ -7,13 +7,46 @@ const $views = document.querySelectorAll('.view-container');
 const $appLogo = document.querySelector('.app-logo');
 const $searchInput = document.querySelector('.search-box');
 
-$searchInput.addEventListener('keydown', () => {
-  const searchValue = $searchInput.value.toLowerCase();
-  const filteredAssets = assetsData.filter((asset) =>
-    asset.name.toLowerCase().includes(searchValue),
-  );
+// $searchInput.addEventListener('keydown', () => {
+//   const searchValue = $searchInput.value.toLowerCase();
+//   const filteredAssets = assetsData.filter((asset) =>
+//     asset.name.toLowerCase().includes(searchValue),
+//   );
 
-  renderAsset(filteredAssets);
+//   renderAsset(filteredAssets);
+// });
+
+// Debounce function to limit the frequency of event handling
+function debounce(func, delay) {
+  let inDebounce;
+  return function () {
+    const context = this;
+    const args = arguments;
+    clearTimeout(inDebounce);
+    inDebounce = setTimeout(() => func.apply(context, args), delay);
+  };
+}
+
+// Event listener for the search input
+$searchInput.addEventListener(
+  'keydown',
+  debounce(() => {
+    const searchValue = $searchInput.value.toLowerCase();
+    const filteredAssets = assetsData.filter((asset) =>
+      asset.name.toLowerCase().includes(searchValue),
+    );
+
+    // Clear current assets and render the filtered ones
+    $assetsList.innerHTML = ''; // Clear existing assets
+    filteredAssets.forEach((asset) => $assetsList.append(renderAsset(asset)));
+  }, 300),
+); // 300ms debounce delay
+
+// Submit event to restore full list
+$searchInput.addEventListener('submit', (e) => {
+  e.preventDefault();
+  $assetsList.innerHTML = '';
+  assetsData.forEach((asset) => $assetsList.append(renderAsset(asset)));
 });
 
 const assetsData = [];
