@@ -5,6 +5,16 @@ const $watchList = document.querySelector('.watch-list');
 const $watchListIcon = document.querySelector('#watch-list-icon');
 const $views = document.querySelectorAll('.view-container');
 const $appLogo = document.querySelector('.app-logo');
+const $searchInput = document.querySelector('.search-box');
+
+$searchInput.addEventListener('keydown', () => {
+  const searchValue = $searchInput.value.toLowerCase();
+  const filteredAssets = assetsData.filter((asset) =>
+    asset.name.toLowerCase().includes(searchValue),
+  );
+
+  renderAsset(filteredAssets);
+});
 
 const assetsData = [];
 const targetUrl = encodeURIComponent(
@@ -56,18 +66,6 @@ xhr.addEventListener('load', function () {
 xhr.send();
 console.log('assetsData', assetsData);
 
-const searchInput = document.querySelector('.search-box');
-searchInput.t;
-console.log(searchInput);
-searchInput.addEventListener('keydown', () => {
-  const searchValue = searchInput.value.toLowerCase();
-  const filteredAssets = assetsData.filter((asset) =>
-    asset.toLowerCase().includes(searchValue),
-  );
-
-  renderAsset(filteredAssets);
-});
-
 function renderAsset(asset) {
   const $column = document.createElement('div');
   $column.setAttribute('class', 'column-third');
@@ -79,9 +77,6 @@ function renderAsset(asset) {
   const $logo = document.createElement('img');
   $logo.setAttribute('class', 'asset-logo');
   $logo.src = asset.logo;
-  // if (Number(data.logos[i].id) === Number(data.currencies[i].id)) {
-
-  // }
 
   const $name = document.createElement('div');
   $name.setAttribute('class', 'name');
