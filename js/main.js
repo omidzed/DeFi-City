@@ -55,7 +55,6 @@ xhr.addEventListener('load', function () {
   let marketData = [];
   marketData = xhr.response.data;
   data.currencies = xhr.response.data;
-  console.log('marketdata', marketData);
   for (let i = 0; i < marketData.length; i++) {
     const price = marketData[i].quote.USD.price;
     const logo = data.logos[i].logo;
@@ -88,7 +87,6 @@ xhr.addEventListener('load', function () {
   }
 });
 xhr.send();
-console.log('assetsData', assetsData);
 
 function renderAsset(asset) {
   const $column = document.createElement('div');
@@ -254,8 +252,6 @@ $assetsList.addEventListener('click', function (event) {
   if (event.target.tagName === 'I') {
     const assetColumnDiv = event.target.closest('.column-third');
     const heartFav = event.target;
-    console.log(heartFav);
-    console.log(assetColumnDiv);
     event.target.classList.add('red-heart');
     event.target.classList.remove('white-heart');
 
@@ -267,13 +263,11 @@ $assetsList.addEventListener('click', function (event) {
       ) {
         data.favorites.unshift(data.currencies[i]);
         $watchList.add;
-        console.log(data.currencies[i]);
       }
     }
   } else if (assetColumnDiv.getAttribute('white-heart') === null) {
     event.target.classList.remove('.red-heart');
     const $watchListItems = document.querySelectorAll('.watch-list-item');
-    console.log('watchListItems', $watchListItems);
     for (let i = 0; i < data.favorites.length; i++) {
       const favoriteAssetId = $watchListItems[i].getAttribute('data-id');
       if (Number(data.favorites.id) === Number(favoriteAssetId)) {
