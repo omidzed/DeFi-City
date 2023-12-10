@@ -6,6 +6,7 @@ const $watchListIcon = document.querySelector('#watch-list-icon');
 const $views = document.querySelectorAll('.view-container');
 const $appLogo = document.querySelector('.app-logo');
 const $searchInput = document.querySelector('.search-box');
+const $assetModal = document.querySelector('.modal-container');
 
 // Debounce function to limit the frequency of event handling
 function debounce(func, delay) {
@@ -139,12 +140,13 @@ function renderAsset(asset) {
 function renderWatchedAsset(asset) {
   const $column = document.createElement('div');
   $column.setAttribute('class', 'column-third');
+  $column.setAttribute('data-id', asset.id);
 
   const $watchListItem = document.createElement('div');
   $watchListItem.setAttribute('class', 'watch-list-item');
 
   const $row = document.createElement('div');
-  $row.setAttribute('class', 'row');
+  $row.setAttribute('class', 'watch-list-logo-container');
 
   const $logo = document.createElement('img');
   $logo.setAttribute('class', 'watch-list-item-logo');
@@ -153,14 +155,11 @@ function renderWatchedAsset(asset) {
   const $watchListItemStats = document.createElement('div');
   $watchListItemStats.setAttribute('class', 'watch-list-item-stats');
 
-  const $topRow = document.createElement('div');
-  $topRow.setAttribute('class', 'top-row');
+  const $statsColumn1 = document.createElement('div');
+  $statsColumn1.setAttribute('class', 'column');
 
-  $topRowsec1 = document.createElement('div');
-  $topRowsec1.setAttribute('class', 'top-row-section1');
-
-  $topRowsec2 = document.createElement('div');
-  $topRowsec2.setAttribute('class', 'top-row-section2');
+  const $statsColumn2 = document.createElement('div');
+  $statsColumn2.setAttribute('class', 'column');
 
   const $name = document.createElement('div');
   $name.setAttribute('class', 'name');
@@ -204,23 +203,20 @@ function renderWatchedAsset(asset) {
   $volume.setAttribute('class', 'volume');
   $volume.textContent = '$' + asset.volume;
 
+  const $circulatingSupplyLabel = document.createElement('p');
   $column.appendChild($watchListItem);
   $watchListItem.appendChild($row);
   $row.appendChild($logo);
   $row.appendChild($watchListItemStats);
-  $watchListItemStats.appendChild($topRow);
-  $topRow.appendChild($topRowsec1);
-  $topRowsec1.appendChild($name);
-  $topRowsec1.appendChild($symbol);
-  $topRow.appendChild($topRowsec2);
-  $topRowsec2.appendChild($price);
-  $topRowsec2.appendChild($percentChange);
-  $watchListItemStats.appendChild($statsDiv1);
-  $statsDiv1.appendChild($circulatingSupply);
-  $watchListItemStats.appendChild($statsDiv2);
-  $statsDiv2.appendChild($marketCap);
-  $watchListItemStats.appendChild($statsDiv3);
-  $statsDiv3.appendChild($volume);
+  $watchListItemStats.appendChild($statsColumn1);
+  $watchListItemStats.appendChild($statsColumn2);
+  $statsColumn1.appendChild($name);
+  $statsColumn1.appendChild($symbol);
+  $statsColumn2.appendChild($price);
+  $statsColumn2.appendChild($percentChange);
+  $statsColumn2.appendChild($circulatingSupply);
+  $statsColumn2.appendChild($marketCap);
+  $statsColumn2.appendChild($volume);
 
   return $column;
 }
@@ -249,35 +245,54 @@ function handleAppLogo(event) {
 
 // Adds Assets to the Watch-List
 $assetsList.addEventListener('click', function (event) {
-  if (event.target.tagName === 'I') {
-    const assetColumnDiv = event.target.closest('.column-third');
-    const heartFav = event.target;
-    event.target.classList.add('red-heart');
-    event.target.classList.remove('white-heart');
+  const heartFav = event.target;
+  const assetColumnDiv = heartFav.closest('.column-third');
+  if (
+    event.target.tagName === 'I' &&
+    heartFav.classList.contains('white-heart')
+  ) {
+    heartFav.classList.add('red-heart');
+    heartFav.classList.remove('white-heart');
+  } else if (heartFav.classList.contains('red-heart')) {
+    heartFav.classList.remove('red-heart');
+    heartFav.classList.add('white-heart');
+  }
+  // for (let i = 0; i < data.currencies.length; i++) {
+  //   if (
+  //     Number(assetColumnDiv.getAttribute('data-id')) ===
+  //       Number(data.currencies[i].id) &&
+  //     data.favorites[i] === null
+  //   ) {
+  //     data.favorites.unshift(data.currencies[i]);
+  //     $watchList.add;
+  //   }
+  // }
+  // const $watchListItems = document.querySelectorAll('.watch-list-item');
+  // for (let i = 0; i < data.favorites.length; i++) {
+  //   const favoriteAssetId = $watchListItems[i].getAttribute('data-id');
+  //   if (Number(data.favorites.id) === Number(favoriteAssetId)) {
+  //     $watchListItems[i].remove();
+  //     data.favorites.splice(i, 1);
+  //   }
+  //   data.favorites.splice(i, 1);
+  //   $watchList.remove();
+  //   }
+  // }
+});
 
-    for (let i = 0; i < data.currencies.length; i++) {
-      if (
-        Number(assetColumnDiv.getAttribute('data-id')) ===
-          Number(data.currencies[i].id) &&
-        data.favorites[i] === null
-      ) {
-        data.favorites.unshift(data.currencies[i]);
-        $watchList.add;
-      }
-    }
-  } else if (assetColumnDiv.getAttribute('white-heart') === null) {
-    event.target.classList.remove('.red-heart');
-    const $watchListItems = document.querySelectorAll('.watch-list-item');
-    for (let i = 0; i < data.favorites.length; i++) {
-      const favoriteAssetId = $watchListItems[i].getAttribute('data-id');
-      if (Number(data.favorites.id) === Number(favoriteAssetId)) {
-        $watchListItems[i].remove();
-        event.target.classList.add('.white-heart');
-        data.favorites.splice(i, 1);
-      }
+$assetsList.addEventListener('click', function (event) {
+  const assetListing = event.target;
+  const assetColumnDiv = assetListing.closest('.column-third');
+  if (
+    event.target.className === 'home-page-listing' &&
+    event.target.tagName !== 'I'
+  ) {
+    $assetModal.classList.remove('hidden');
+  }
+});
 
-      data.favorites.splice(i, 1);
-      $watchList.remove();
-    }
+$assetModal.addEventListener('click', function (event) {
+  if (event.target.className === 'modal-container') {
+    $assetModal.classList.add('hidden');
   }
 });
