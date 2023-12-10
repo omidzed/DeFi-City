@@ -1,20 +1,48 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AJAX Project</title>
-  <link rel="icon" href="images/favicon.ico">
-  <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/layout.css">
-  <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
-  <header>
-  </header>
-  <main>
-  </main>
-  <script src="js/data.js"></script>
-  <script src="js/main.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AJAX Project</title>
+    <link rel="icon" href="images/favicon.ico" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <script
+      src="https://kit.fontawesome.com/c9f93e45d2.js"
+      crossorigin="anonymous"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400&display=swap"
+      rel="stylesheet" />
+  </head>
+  <body>
+    <div class="splash-page hidden">
+      <img class="splash" src="/images/splash.jpg" alt="splash-page" />
+      <div class="circle"></div>
+    </div>
+    <header>
+      <div>
+        <img class="app-logo" src="./images/defi.png" alt="app-logo" />
+      </div>
+    </header>
+    <main class="main-container">
+      <div class="view-container" data-view="home-page">
+        <div class="search-box-container">
+          <form id="search-form">
+            <input class="search-box" type="search" placeholder="Search" />
+          </form>
+          <i
+            class="home-page-heart fa-regular fa-heart"
+            id="watch-list-icon"></i>
+        </div>
+        <div class="assets-list"></div>
+      </div>
+
+      <div class="view-container hidden" data-view="watch-list">
+        <div class="watch-list"></div>
+      </div>
+    </main>
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+  </body>
 </html>

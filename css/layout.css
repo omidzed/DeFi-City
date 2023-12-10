@@ -1,0 +1,88 @@
+.hidden {
+  display: none !important;
+}
+
+.view-container {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 0 2rem;
+  padding-bottom: 4rem;
+  align-items: center;
+  background: linear-gradient(rgb(35, 31, 32), white, black);
+}
+
+.assets-list,
+.watch-list {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.assets-list > div,
+.watch-list > div {
+  width: 100%;
+}
+
+.row {
+  display: flex;
+}
+
+@media screen and (min-width: 600px) {
+  .home-page-listing {
+    max-width: 250px;
+    width: 100%;
+  }
+
+  .assets-list > div,
+  .watch-list > div {
+    width: 50%;
+  }
+
+  .assets-list,
+  .watch-list {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .search-box {
+    padding: 0.5rem 3rem;
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .home-page-listing {
+    max-width: 250px;
+    width: 100%;
+  }
+
+  .assets-list > div,
+  .watch-list > div {
+    width: 33.3%;
+  }
+}
+
+@media screen and (min-width: 1250px) {
+  .home-page-listing {
+    max-width: 250px;
+    width: 100%;
+  }
+
+  .assets-list > div,
+  .watch-list > div {
+    width: 25%;
+  }
+}
+
+@media screen and (min-width: 1700px) {
+  .home-page-listing {
+    max-width: 250px;
+    width: 100%;
+  }
+
+  .assets-list > div,
+  .watch-list > div {
+    width: 20%;
+  }
+}
